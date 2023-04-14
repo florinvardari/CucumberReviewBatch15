@@ -1,5 +1,6 @@
 package Utils;
 
+import Steps.PageInitializer;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -9,7 +10,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import java.time.Duration;
 
-public class CommonMethods {
+public class CommonMethods extends PageInitializer {
     public static WebDriver driver;
     public  static  void openBrowserAndLaunchApplication(){
         ConfigReader.readProperties();
@@ -35,6 +36,7 @@ public class CommonMethods {
         driver.manage().window().maximize();
         driver.get(ConfigReader.getPropertyValue("url"));
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(Constants.WAIT_TIME));
+        initializePageObject();
     }
     public static void closeBrowser(){
         driver.close();
@@ -52,5 +54,14 @@ public class CommonMethods {
     }
     public static void getShownText(WebElement element){
         element.getText();
+    }
+    public static void validateCredentials(WebElement element, String msg){
+        String errorMsg =element.getText();
+        if (errorMsg.equalsIgnoreCase(msg)) {
+            System.out.println("Test passed");
+        }else {
+            System.out.println("Test failed");
+        }
+
     }
 }
