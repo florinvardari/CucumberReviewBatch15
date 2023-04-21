@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/Features",
 
         glue = "Steps",
-        tags = "",
+        tags = " @datatable",
         dryRun = false,
         plugin = {"pretty","html:target/Cucumber.html","json:target/Cucumber.json"})
 

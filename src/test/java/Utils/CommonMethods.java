@@ -56,12 +56,7 @@ public class CommonMethods extends PageInitializer {
         element.getText();
     }
     public static void validateCredentials(WebElement element, String msg){
-        String errorMsg =element.getText();
-        if (errorMsg.equalsIgnoreCase(msg)) {
-            System.out.println("Test passed");
-        }else {
-            System.out.println("Test failed");
-        }
+
 
     }
 }

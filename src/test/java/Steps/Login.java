@@ -5,6 +5,7 @@ import Utils.ConfigReader;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 
 
@@ -24,10 +25,10 @@ public class Login extends CommonMethods {
     }
     @Then("user is logged in successfully")
     public void user_is_logged_in_successfully() {
-        boolean userloggedIn=driver.findElement(By.xpath("//a[@id='welcome']")).isDisplayed();
-        if (userloggedIn){
-            System.out.println("User is logged in successfully");
-        }
+
+        String actualMsg=dash.welcomeText.getText();
+        String expMsg="Welcome Admin";
+        Assert.assertEquals(expMsg,actualMsg);
     }
     @Then("Close the browser")
     public void close_the_browser() {
@@ -40,17 +41,7 @@ public class Login extends CommonMethods {
     }
     @When("get message wrong credentials")
     public void get_message_wrong_credentials() {
-        getShownText(login.wrongCredentials);
-        String text=login.wrongCredentials.getText();
-        if (text.equalsIgnoreCase("Username cannot be empty")){
-            System.out.println("test passed");
-        } else if (text.equalsIgnoreCase("Password cannot be empty")) {
-            System.out.println("test passed");
-        }else if (text.equalsIgnoreCase("Invalid credentials")) {
-            System.out.println("test passed");
-        }else {
-            System.out.println("test failed");
-        }
+
     }
     @When("user enters  {string} and  {string}")
     public void user_enters_and(String username, String password) {
@@ -58,8 +49,13 @@ public class Login extends CommonMethods {
      sendText(login.passwordTextBox, password);
     }
     @When("get message {string}")
-    public void get_message(String errorMsg) {
-       validateCredentials(login.wrongCredentials, errorMsg);
+    public void get_message(String expectedErrorMsg) {
+        String actualError=login.errorLogin.getText();
+        Assert.assertEquals(expectedErrorMsg,actualError);
+
+
     }
+
+
 
 }

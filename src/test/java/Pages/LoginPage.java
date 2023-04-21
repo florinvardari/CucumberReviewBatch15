@@ -14,8 +14,9 @@ public class LoginPage extends CommonMethods {
     public WebElement passwordTextBox;
     @FindBy(id ="btnLogin" )
     public WebElement loginBtn;
+
     @FindBy(xpath = "//span[@id='spanMessage']")
-    public WebElement wrongCredentials;
+    public WebElement errorLogin;
     public LoginPage(){
         PageFactory.initElements(driver,this);
     }
